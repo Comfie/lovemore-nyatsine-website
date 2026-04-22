@@ -1,21 +1,35 @@
+import Image from "next/image";
+
 const books = [
   {
     title: "Hunt Like a Buffalo Hunter",
+    slug: "buffalo-hunter",
     status: "Available now",
+    image: "/books/buffalo-hunter.jpeg",
+    alt: "Cover artwork for Hunt Like a Buffalo Hunter by Lovemore Nyatsine",
+    note: "Precision, patience, and power.",
     description:
       "A reflective leadership work on patience, discipline, resilience, and the long game of meaningful pursuit.",
   },
   {
     title: "Dagga Boy",
+    slug: "dagga-boy",
     status: "Coming soon",
+    image: "/books/dagga-boy.jpeg",
+    alt: "Cover artwork for Dagga Boy by Lovemore Nyatsine",
+    note: "Not loudly. Not quickly. But fully.",
     description:
       "A deeper, more personal work on strength, solitude, survival, and the quiet weight a man learns to carry.",
   },
   {
-    title: "Falling Mantle",
+    title: "Mantles & Titles",
+    slug: "mantles-and-titles",
     status: "In development",
+    image: "/books/mantles-and-titles.jpeg",
+    alt: "Cover artwork for Mantles and Titles by Lovemore Nyatsine",
+    note: "It is not what you are called. It is what you answer to.",
     description:
-      "A meditation on calling, identity, responsibility, and the gap between what one is called and what one answers to.",
+      "A meditation on calling, identity, responsibility, and the difference between what is conferred and what is formed in you.",
   },
 ];
 
@@ -107,6 +121,14 @@ export default function Home() {
               turn attention into permanence and credibility into opportunity.
             </p>
 
+            <div className="hero-signature">
+              <span className="hero-signature-label">Editorial stance</span>
+              <p>
+                Books that endure. Ideas that compound. Leadership that carries
+                weight.
+              </p>
+            </div>
+
             <div className="hero-actions">
               <a href="#books" className="button button-primary">
                 Explore the books
@@ -142,10 +164,15 @@ export default function Home() {
             </div>
 
             <div className="hero-quote">
+              <span className="hero-quote-label">Signature thought</span>
               <p>
                 Social platforms create momentum. A website lets that momentum
                 accumulate into a legacy.
               </p>
+              <span className="hero-quote-credit">
+                A body of work needs a place where it can stay, gather meaning,
+                and be returned to.
+              </span>
             </div>
           </div>
         </div>
@@ -207,14 +234,25 @@ export default function Home() {
             {books.map((book, index) => (
               <article
                 key={book.title}
-                className={`book-card reveal reveal-step-${index + 1}`}
+                className={`book-card book-card-${book.slug} reveal reveal-step-${index + 1}`}
               >
-                <div className="book-status">{book.status}</div>
-                <h3>{book.title}</h3>
-                <p>{book.description}</p>
-                <a href="#contact" className="text-link">
-                  View book pathway
-                </a>
+                <div className="book-card-media">
+                  <Image
+                    src={book.image}
+                    alt={book.alt}
+                    fill
+                    sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                  />
+                  <div className="book-status">{book.status}</div>
+                </div>
+                <div className="book-card-body">
+                  <span className="book-card-note">{book.note}</span>
+                  <h3>{book.title}</h3>
+                  <p>{book.description}</p>
+                  <a href="#contact" className="text-link">
+                    View book pathway
+                  </a>
+                </div>
               </article>
             ))}
           </div>
