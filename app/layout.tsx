@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Lovemore Nyatsine | Author, Strategist, Coach",
+  title: "Lovemore Nyatsine — Author, Coach, Strategist",
   description:
-    "A premium author platform for Lovemore Nyatsine: books, ideas, leadership reflections, and speaking opportunities.",
+    "The home of Lovemore Nyatsine's books and writing on leadership, endurance, and becoming.",
 };
 
 export default function RootLayout({
@@ -14,8 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
-

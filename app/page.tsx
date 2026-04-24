@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { ContactEmail } from "./ContactEmail";
+import { NewsletterForm } from "./NewsletterForm";
 
 const books = [
   {
@@ -10,6 +12,8 @@ const books = [
     note: "Precision, patience, and power.",
     description:
       "A reflective leadership work on patience, discipline, resilience, and the long game of meaningful pursuit.",
+    cta: "Buy the book",
+    href: "#contact",
   },
   {
     title: "Dagga Boy",
@@ -20,6 +24,8 @@ const books = [
     note: "Not loudly. Not quickly. But fully.",
     description:
       "A deeper, more personal work on strength, solitude, survival, and the quiet weight a man learns to carry.",
+    cta: "Notify me on release",
+    href: "#email",
   },
   {
     title: "Mantles & Titles",
@@ -30,39 +36,32 @@ const books = [
     note: "It is not what you are called. It is what you answer to.",
     description:
       "A meditation on calling, identity, responsibility, and the difference between what is conferred and what is formed in you.",
-  },
-];
-
-const pillars = [
-  {
-    title: "Books",
-    text: "Give each title a proper home with excerpts, themes, endorsements, launch updates, and a clear path to buy or preorder.",
-  },
-  {
-    title: "Thought Leadership",
-    text: "Turn social media writing into a structured body of ideas around leadership, becoming, strategy, discipline, endurance, and growth.",
-  },
-  {
-    title: "Platform",
-    text: "Build one central place where readers, media, collaborators, and decision-makers can understand the work and the man behind it.",
+    cta: "Notify me on release",
+    href: "#email",
   },
 ];
 
 const contentStreams = [
-  "Leadership reflections",
-  "Running and endurance lessons",
-  "Books and excerpts",
-  "Strategy and execution insights",
-  "Speaking and media features",
-  "Newsletter and community building",
+  "Leadership",
+  "Endurance & the long game",
+  "Strategy & execution",
+  "Book excerpts",
+  "Features & interviews",
 ];
 
 const roles = [
   "Author",
-  "Strategist",
   "Coach",
+  "Strategist",
   "Speaker",
-  "Executive leader",
+];
+
+const navLinks = [
+  { label: "About", href: "#about" },
+  { label: "Books", href: "#books" },
+  { label: "Writing", href: "#writing" },
+  { label: "Platform", href: "#platform" },
+  { label: "Contact", href: "#contact" },
 ];
 
 export default function Home() {
@@ -82,47 +81,28 @@ export default function Home() {
             </p>
           </div>
 
-          <nav className="nav">
-            <a href="#about">About</a>
-            <a href="#books">Books</a>
-            <a href="#writing">Writing</a>
-            <a href="#platform">Platform</a>
-            <a href="#contact">Contact</a>
+          <nav className="nav" aria-label="Primary navigation">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href}>
+                {link.label}
+              </a>
+            ))}
           </nav>
-
-          <details className="mobile-menu">
-            <summary aria-label="Open navigation menu">
-              <span />
-              <span />
-              <span />
-            </summary>
-            <nav className="mobile-menu-panel" aria-label="Mobile navigation">
-              <a href="#about">About</a>
-              <a href="#books">Books</a>
-              <a href="#writing">Writing</a>
-              <a href="#platform">Platform</a>
-              <a href="#contact">Contact</a>
-            </nav>
-          </details>
         </div>
       </header>
 
       <section id="hero" className="hero">
         <div className="container hero-grid">
           <div className="hero-copy reveal">
-            <span className="eyebrow">Becoming, deliberately</span>
-            <h1>
-              A distinguished digital home for books, leadership, and the quiet
-              force behind the work.
-            </h1>
+            <span className="eyebrow">Becoming, deliberately.</span>
+            <h1>Books, leadership, and the long work of becoming.</h1>
             <p className="hero-lead">
-              Lovemore Nyatsine operates where authorship, coaching, disciplined
-              growth, and executive leadership meet. This site is designed to
-              turn attention into permanence and credibility into opportunity.
+              I write, coach, and lead at the intersection of discipline,
+              endurance, and quiet conviction. This is where the books live, the
+              ideas gather, and the work stays.
             </p>
 
             <div className="hero-signature">
-              <span className="hero-signature-label">Editorial stance</span>
               <p>
                 Books that endure. Ideas that compound. Leadership that carries
                 weight.
@@ -133,8 +113,8 @@ export default function Home() {
               <a href="#books" className="button button-primary">
                 Explore the books
               </a>
-              <a href="#platform" className="button button-secondary">
-                View the platform
+              <a href="#writing" className="button button-secondary">
+                Read the writing
               </a>
             </div>
 
@@ -147,32 +127,27 @@ export default function Home() {
 
           <div className="hero-panel reveal reveal-delay">
             <div className="hero-panel-frame">
-              <div className="hero-panel-label">Positioning</div>
               <h2>
-                Not a résumé. A body of work shaped by discipline, strategy, and
-                earned perspective.
+                Not a résumé. A body of work — shaped by discipline, strategy,
+                and earned perspective.
               </h2>
               <p>
-                The tone leans editorial and authoritative: less motivational
-                noise, more weight, clarity, and conviction.
+                Less motivational noise. More weight, clarity, and conviction.
               </p>
             </div>
 
             <div className="hero-note">
               <span className="stat-value">3</span>
-              <span className="stat-label">Books in the ecosystem</span>
+              <span className="stat-label">Three books. One throughline.</span>
             </div>
 
             <div className="hero-quote">
               <span className="hero-quote-label">Signature thought</span>
               <p>
-                Social platforms create momentum. A website lets that momentum
-                accumulate into a legacy.
+                “Social platforms create momentum. A home like this lets the
+                work stay — so ideas can gather meaning, and readers can return
+                to them.”
               </p>
-              <span className="hero-quote-credit">
-                A body of work needs a place where it can stay, gather meaning,
-                and be returned to.
-              </span>
             </div>
           </div>
         </div>
@@ -182,34 +157,48 @@ export default function Home() {
         <div className="container section-grid">
           <div className="section-heading reveal">
             <span className="eyebrow">About</span>
-            <h2>Build the man behind the message.</h2>
+            <h2>About Lovemore</h2>
+            <div className="about-portrait">
+              <Image
+                src="/lovemore_image.jpg"
+                alt="Lovemore Nyatsine in conversation on stage"
+                fill
+                sizes="(max-width: 767px) 100vw, 45vw"
+              />
+            </div>
           </div>
 
           <div className="about-card reveal reveal-delay">
             <p className="about-intro">
-              Lovemore Nyatsine is an author, strategist, coach, and reflective
-              voice on leadership, endurance, growth, execution, and becoming.
-              His work carries the credibility of lived responsibility at senior
-              management level while remaining deeply human and inwardly
-              attentive.
+              Lovemore Nyatsine is an author, coach, and strategist writing on
+              leadership, endurance, and the long work of becoming. His
+              perspective is shaped by years of senior executive responsibility
+              — carrying real weight, making real decisions, and learning what
+              holds up under pressure.
             </p>
             <p>
-              The site should feel elegant, grounded, and unmistakably
-              intentional, with enough warmth for readers and enough authority
-              for media, collaborators, and corporate audiences.
+              His writing is deliberately unhurried. Less performance, more
+              substance. Less commentary, more conviction. It speaks to leaders,
+              builders, and quiet strivers who are more interested in what
+              endures than in what trends.
             </p>
             <div className="about-metrics">
               <div>
-                <span>Positioning</span>
-                <strong>Author-led personal brand</strong>
+                <span>Writing</span>
+                <strong>
+                  Books, essays, and reflections on leadership and becoming.
+                </strong>
               </div>
               <div>
-                <span>Audience</span>
-                <strong>Readers, leaders, media, partners</strong>
+                <span>Coaching</span>
+                <strong>
+                  Selective one-to-one work with leaders ready for deeper
+                  execution.
+                </strong>
               </div>
               <div>
-                <span>Commercial edge</span>
-                <strong>Books, speaking, advisory credibility</strong>
+                <span>Advisory</span>
+                <strong>Strategic advisory through Katalytic.</strong>
               </div>
             </div>
           </div>
@@ -221,12 +210,11 @@ export default function Home() {
           <div className="section-row reveal">
             <div className="section-heading compact books-heading">
               <span className="eyebrow">Books</span>
-              <h2>The books should anchor the entire platform.</h2>
+              <h2>The Books</h2>
             </div>
             <p className="section-copy">
-              Each title can grow into its own destination with cover art,
-              synopsis, excerpt pages, endorsement lines, launch content, and a
-              direct path to purchase.
+              Three works tracing one throughline — how a man is formed, what
+              he carries, and what he answers to.
             </p>
           </div>
 
@@ -249,8 +237,8 @@ export default function Home() {
                   <span className="book-card-note">{book.note}</span>
                   <h3>{book.title}</h3>
                   <p>{book.description}</p>
-                  <a href="#contact" className="text-link">
-                    View book pathway
+                  <a href={book.href} className="text-link">
+                    {book.cta}
                   </a>
                 </div>
               </article>
@@ -263,18 +251,18 @@ export default function Home() {
         <div className="container writing-grid">
           <div className="writing-copy reveal">
             <span className="eyebrow">Writing and ideas</span>
-            <h2>Turn timely posts into a lasting intellectual footprint.</h2>
+            <h2>Writing & Ideas</h2>
             <p>
-              Lovemore&apos;s social writing already signals clarity and depth.
-              The website gives those reflections a structure people can return
-              to, search, cite, share, and subscribe to.
+              Essays and reflections on leadership, endurance, execution, and
+              becoming — gathered here so they can be returned to, not just
+              scrolled past.
             </p>
           </div>
 
           <div className="writing-panel reveal reveal-delay">
             <div className="writing-panel-header">
-              <span>Content streams to organise</span>
-              <strong>Editorial architecture</strong>
+              <span>Categories</span>
+              <strong>Ready to fill</strong>
             </div>
 
             <div className="tag-grid">
@@ -288,64 +276,21 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="platform" className="section">
-        <div className="container">
-          <div className="section-row reveal">
-            <div className="section-heading compact platform-heading">
-              <span className="eyebrow">Platform architecture</span>
-              <h2>What the website should do, beyond looking polished.</h2>
-            </div>
-            <p className="section-copy">
-              The strongest personal brand sites do more than introduce a person.
-              They create a system for discoverability, trust, and long-term
-              audience ownership.
-            </p>
-          </div>
+      <span id="platform" className="anchor-target" aria-hidden="true" />
 
-          <div className="pillar-grid">
-            {pillars.map((pillar, index) => (
-              <article
-                key={pillar.title}
-                className={`pillar-card reveal reveal-step-${index + 1}`}
-              >
-                <span className="pillar-index">0{index + 1}</span>
-                <h3>{pillar.title}</h3>
-                <p>{pillar.text}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="platform-banner reveal">
-            <span className="eyebrow">Recommended next step</span>
-            <h2>
-              Launch with a sharp personal brand site first, then expand into
-              dedicated book pages, newsletter capture, media features, and
-              speaking inquiries.
-            </h2>
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
+      <section id="email" className="section">
         <div className="container newsletter-card reveal">
           <div>
             <span className="eyebrow">Email list</span>
-            <h2>Own the audience you are building.</h2>
+            <h2>Stay close to the work.</h2>
             <p>
-              A mailing list turns passing readers into a reachable community for
-              launches, essays, reflections, events, and strategic updates.
+              A monthly letter with new essays, book updates, and reflections on
+              leadership and becoming. No noise. No filler. Unsubscribe any
+              time.
             </p>
           </div>
 
-          <form className="newsletter-form">
-            <label className="sr-only" htmlFor="email">
-              Email address
-            </label>
-            <input id="email" type="email" placeholder="Enter your email" />
-            <button type="submit" className="button button-primary">
-              Join the list
-            </button>
-          </form>
+          <NewsletterForm />
         </div>
       </section>
 
@@ -353,27 +298,26 @@ export default function Home() {
         <div className="container contact-grid">
           <div className="section-heading reveal">
             <span className="eyebrow">Contact</span>
-            <h2>Create room for the right opportunities.</h2>
+            <h2>Get in touch</h2>
             <p className="section-copy">
-              The contact section should be designed for meaningful inbound
-              interest: media requests, speaking opportunities, collaborations,
-              consulting, and book-related enquiries.
+              For speaking, media, advisory, and book enquiries.
             </p>
           </div>
 
           <div className="contact-card reveal reveal-delay">
             <div>
-              <span>Speaking and media</span>
-              <strong>Available for selected conversations and features</strong>
+              <span>Speaking & media</span>
+              <strong>Selected conversations, interviews, and features.</strong>
             </div>
             <div>
               <span>Books</span>
-              <strong>Launches, interviews, excerpts, and reader engagement</strong>
+              <strong>Launches, excerpts, and reader engagement.</strong>
             </div>
             <div>
-              <span>Consulting</span>
+              <span>Advisory</span>
               <strong>Strategic advisory through Katalytic</strong>
             </div>
+            <ContactEmail />
           </div>
         </div>
       </section>
@@ -384,8 +328,35 @@ export default function Home() {
             <div className="brand-mark brand-mark-footer">Lovemore Nyatsine</div>
             <p className="brand-subtitle">Becoming, deliberately.</p>
           </div>
+          <div className="footer-social" aria-label="Social links">
+            <span>Social</span>
+            <div>
+              <a
+                href="https://www.linkedin.com/in/lovemorenyatsine/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Lovemore Nyatsine on LinkedIn"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.3 8h4.4v15H.3V8Zm7.2 0h4.2v2.05h.06c.58-1.1 2-2.25 4.13-2.25 4.42 0 5.24 2.9 5.24 6.68V23h-4.4v-7.55c0-1.8-.03-4.12-2.5-4.12-2.52 0-2.9 1.97-2.9 4V23H7.5V8Z" />
+                </svg>
+                LinkedIn
+              </a>
+              <a
+                href="https://www.facebook.com/lovemore.nyatsine"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Lovemore Nyatsine on Facebook"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.96h-1.5c-1.49 0-1.95.93-1.95 1.88v2.28h3.32l-.53 3.49H13.9V24C19.61 23.1 24 18.1 24 12.07Z" />
+                </svg>
+                Facebook
+              </a>
+            </div>
+          </div>
           <p className="footer-copy">
-            A platform for books, ideas, leadership, and thoughtful influence.
+            © 2026 Lovemore Nyatsine. All rights reserved.
           </p>
         </div>
       </footer>
